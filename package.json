@@ -1,0 +1,27 @@
+{
+  "name": "fso-part3",
+  "version": "0.0.1",
+  "description": "Exercises for Part 3 Full Stack Open",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uglyhott/fso-part3.git"
+  },
+  "author": "Liam Blumenstein-Tait",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uglyhott/fso-part3/issues"
+  },
+  "homepage": "https://github.com/uglyhott/fso-part3#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
