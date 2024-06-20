@@ -49,21 +49,25 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.post('/api/persons', (req, res) => {
+    let status = 400
+    let json = { error: 'unknown error occurred' }
     const body = req.body
-    if (!body) {
-        res.status(400).json({
-            error: 'content missing'
-        })
-    }
-    const newPerson = {
-        id: Math.floor(Math.random() * 10000000),
-        name: body.name,
-        number: body.number,
+    if (!body || !body.name || !body.number) {
+        json.error = 'content missing'
+    } else if (persons.find(person => person.name === body.name)) {
+        json.error = 'name must be unique'
+    } else {
+        status = 200
+        json = {
+            id: Math.floor(Math.random() * 10000000),
+            name: body.name,
+            number: body.number,
+        }
+
+        persons = persons.concat(json)
     }
 
-    persons = persons.concat(newPerson)
-
-    res.status(200).send(newPerson)
+    res.status(status).send(json)
 })
 
 const PORT = 3001

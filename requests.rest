@@ -11,11 +11,27 @@ GET http://localhost:3001/api/persons/6
 ###
 DELETE http://localhost:3001/api/persons/2
 
-###
+### Test adding new person
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
     "name": "Big L",
+    "number": "0800-1234321"
+}
+
+### Test missing number
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Big L"
+}
+
+### Test Missing Name
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
     "number": "0800-1234321"
 }
