@@ -1,3 +1,9 @@
+# Fly.io
+fly.toml
+.dockerignore
+Dockerfile
+.github/
+
 # Logs
 logs
 *.log
