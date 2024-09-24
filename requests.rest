@@ -9,7 +9,7 @@ GET http://localhost:3001/api/persons/2
 GET http://localhost:3001/api/persons/6
 
 ###
-DELETE http://localhost:3001/api/persons/66f2c7b86255bd29e577829a
+DELETE http://localhost:3001/api/persons/13412434
 
 ### Test adding new person
 POST http://localhost:3001/api/persons
