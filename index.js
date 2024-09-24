@@ -44,8 +44,10 @@ app.get('/api/persons', (req, res) => {
 
 app.get('/info', (req, res) => {
     const time = new Date()
-    const text = `<p>Phonebook has info for ${persons.length} people</p><p>${time.toString()}</p>`
-    res.send(text)
+    Person.countDocuments().then(documentCount => {
+        const text = `<p>Phonebook has info for ${documentCount} people</p><p>${time.toString()}</p>`
+        res.send(text)
+    })
 })
 
 app.get('/api/persons/:id', (req, res) => {
