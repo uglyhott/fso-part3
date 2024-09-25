@@ -35,3 +35,12 @@ Content-Type: application/json
 {
     "number": "0800-1234321"
 }
+
+### Test Number Validation
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Timbo",
+    "number": "0800-1234123"
+}
