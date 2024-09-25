@@ -64,36 +64,30 @@ app.delete('/api/persons/:id', (req, res, next) => {
         .catch(error => next(error))
 })
 
-app.post('/api/persons', (req, res) => {
-    let status = 400
-    let json = { error: 'unknown error occurred' }
+app.post('/api/persons', (req, res, next) => {
     const body = req.body
-    if (!body || !body.name || !body.number) {
-        json.error = 'content missing'
-    } else {
-        status = 200
-        const person = new Person({
-            name: body.name,
-            number: body.number,
-        })
 
-        person.save().then(savedPerson => {
+    const person = new Person({
+        name: body.name,
+        number: body.number,
+    })
+
+    person.save()
+        .then(savedPerson => {
             json = savedPerson.toJSON()
-            res.status(status).send(json)
+            res.status(200).send(json)
         })
-    }
-
+        .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (req, res, next) => {
-    const body = req.body
+    const { name, number } = req.body
 
-    const person = {
-        name: body.name,
-        number: body.number,
-    }
-
-    Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    Person.findByIdAndUpdate(
+        req.params.id,
+        { name, number },
+        { new: true, runValidators: true, context: 'query' }
+    )
         .then(updatedPerson => {
             res.json(updatedPerson)
         })
@@ -105,6 +99,8 @@ const errorHandler = (error, request, response, next) => {
 
     if (error.name === 'CastError') {
         return response.status(400).send({ error: 'malformatted id' })
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({ error: error.message })
     }
 
     next(error)
